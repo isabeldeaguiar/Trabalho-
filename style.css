@@ -1,0 +1,548 @@
+/* Definição de Cores Base (Tema Escuro Padrão) */
+:root {
+    --bg-main: #0a0033;
+    --bg-secondary: #1a004d;
+    --card-bg: #1a1047;
+    --card-bg-hover: #2a1b5c;
+    --nav-bg: #1a1047;
+    --accent-color-1: #00f0ff; /* Ciano/Azul */
+    --accent-color-2: #b45bff; /* Roxo */
+    --text-color: #fff;
+    --text-secondary: #ccc;
+    --shadow-color: rgba(0, 240, 255, 0.1);
+    --shadow-accent: rgba(0, 240, 255, 0.6);
+    --button-text-color: #1a1047;
+    --form-border: #b45bff;
+    --form-focus-shadow: rgba(0, 240, 255, 0.5);
+}
+
+/* Tema Claro */
+body.light-theme {
+    --bg-main: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --card-bg: #ffffff;
+    --card-bg-hover: #e6e6e6;
+    --nav-bg: #5c32c2; 
+    --accent-color-1: #ff4b4b; /* Vermelho/Accent */
+    --accent-color-2: #3a2578; /* Roxo Escuro */
+    --text-color: #333;
+    --text-secondary: #555;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-accent: rgba(92, 50, 194, 0.4);
+    --button-text-color: #fff;
+    --form-border: #5c32c2;
+    --form-focus-shadow: rgba(92, 50, 194, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background: linear-gradient(135deg, var(--bg-main), var(--bg-secondary));
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s;
+  }
+  nav {
+    background: var(--nav-bg);
+    padding: 15px 30px;
+    margin:0 8px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 0 0 15px var(--shadow-color);
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s;
+  } 
+  nav button {
+    position: relative; 
+    z-index: 1; 
+  }
+  nav button:hover {
+    z-index: 2; 
+  }
+  nav button {
+    background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+    border: none;
+    color: var(--button-text-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; 
+  }
+  nav button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-accent);
+  }
+  main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  section {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--accent-color-1);
+    text-shadow: 0 0 5px var(--shadow-color);
+    transition: color 0.3s;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para cards de Atalho na página Início */
+  .cards-atalho {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    width: 100%;
+    max-width: 600px; 
+    margin-top: 30px;
+  }
+  .card-atalho {
+    background: var(--card-bg-hover);
+    padding: 25px;
+    border-radius: 10px;
+    width: 100%; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, background 0.3s, border-color 0.3s;
+    border: 2px solid var(--accent-color-1)44;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-atalho:hover {
+    transform: scale(1.02);
+    background: var(--card-bg);
+    border-color: var(--accent-color-1);
+  }
+  .card-atalho h3 {
+    color: var(--accent-color-2);
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  .card-atalho p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    transition: color 0.3s;
+  }
+  .card-atalho-icon {
+    font-size: 2rem;
+    color: var(--accent-color-1);
+    transition: color 0.3s;
+  }
+
+  /* Formulário de Login/Cadastro */
+  .login-container, .cadastro-container {
+      max-width: 400px;
+      padding: 30px;
+  }
+  .login-container h1, .cadastro-container h1 {
+    margin-bottom: 30px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: 500;
+    color: var(--accent-color-1);
+    transition: color 0.3s;
+  }
+  input[type="email"], input[type="password"], input[type="text"], textarea {
+    padding: 12px;
+    border: 1px solid var(--form-border);
+    border-radius: 6px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
+  }
+  input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent-color-1);
+    box-shadow: 0 0 8px var(--form-focus-shadow);
+    outline: none;
+  }
+  .botao-principal {
+    margin-top: 25px;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+    border: none;
+    border-radius: 8px;
+    color: var(--button-text-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  .botao-principal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-accent);
+  }
+  
+  /* Estilos para a seção de Cursos */
+  .curso-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+  }
+  .curso-card {
+    background: var(--card-bg-hover);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--form-border)44;
+    transition: border-color 0.3s, transform 0.3s, background 0.3s;
+  }
+  .curso-card:hover {
+    border-color: var(--accent-color-1);
+    transform: translateY(-3px);
+  }
+  .curso-card h3 {
+    color: var(--accent-color-1);
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .curso-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    transition: color 0.3s;
+  }
+  .curso-card button {
+    background: var(--accent-color-2);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .curso-card button:hover {
+    background: var(--accent-color-1);
+    color: var(--button-text-color);
+  }
+  .curso-card button[disabled] {
+      background: #333;
+      cursor: not-allowed;
+      opacity: 0.7;
+  }
+  /* Estilos para o Conteúdo do Curso Detalhe */
+  .modulos-lista {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+  }
+  .modulos-lista li {
+    background: var(--card-bg-hover);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--accent-color-2);
+    transition: background 0.2s, border-left-color 0.3s;
+    cursor: pointer;
+  }
+  .modulos-lista li:hover {
+    background: var(--card-bg);
+    border-left-color: var(--accent-color-1);
+  }
+
+  /* Estilos do Calendário */
+  .calendario-container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    align-items: flex-start;
+  }
+  .calendario-principal {
+    flex-grow: 1;
+    background: var(--card-bg-hover);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s;
+  }
+  .calendario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .calendario-header button {
+    background: var(--accent-color-2);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .calendario-header button:hover {
+    background: var(--accent-color-1);
+    color: var(--button-text-color);
+  }
+  .calendario-dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  .dias-semana {
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: var(--accent-color-1);
+    background: var(--card-bg);
+    border-radius: 4px 4px 0 0;
+    transition: background 0.3s, color 0.3s;
+  }
+  .dia-celula {
+    background: var(--card-bg);
+    color: var(--text-color);
+    text-align: right;
+    padding: 10px;
+    height: 100px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .dia-celula:hover:not(.inativo) {
+    background: var(--card-bg-hover);
+  }
+  .inativo {
+    color: var(--text-secondary);
+    background: var(--bg-main);
+    cursor: default;
+  }
+  .hoje {
+    border: 2px solid var(--accent-color-1);
+  }
+  .dia-evento {
+    background: var(--accent-color-2);
+    color: #fff;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    padding: 2px 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block; 
+  }
+  .calendario-agenda {
+    width: 300px;
+    background: var(--card-bg-hover);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 85px; 
+    transition: background 0.3s;
+  }
+  .calendario-agenda h2 {
+    color: var(--accent-color-1);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  .lista-eventos p {
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--card-bg);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    transition: border-bottom-color 0.3s;
+  }
+  .lista-eventos strong {
+    color: var(--accent-color-2);
+    display: block;
+    margin-top: 5px;
+    transition: color 0.3s;
+  }
+  /* Estilos para o Modal de Novo Evento e Senha */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s;
+  }
+  .modal-conteudo {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 25px var(--shadow-accent);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .modal-conteudo h2 {
+    color: var(--accent-color-1);
+    margin-bottom: 20px;
+    text-align: center;
+    transition: color 0.3s;
+  }
+  .modal-conteudo form label {
+      color: var(--text-color);
+      margin-bottom: 5px;
+      transition: color 0.3s;
+  }
+  .hidden {
+    display: none !important;
+  }
+  /* Estilos para o Botão de Fechar Modal */
+  #fecharModalBtn, #fecharSenhaModalBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent-color-2); 
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: background 0.2s, transform 0.2s;
+  }
+  #fecharModalBtn:hover, #fecharSenhaModalBtn:hover {
+      background: var(--accent-color-1);
+      transform: scale(1.02);
+  }
+  
+  /* Estilos para a seção de Configurações (NOVA) */
+  .configuracoes-container {
+      max-width: 600px;
+      padding: 30px;
+  }
+  .config-card {
+      width: 100%;
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--card-bg-hover);
+      border-radius: 10px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+  }
+  .config-card h3 {
+      color: var(--accent-color-2);
+      font-size: 1.4rem;
+      margin-bottom: 5px;
+      transition: color 0.3s;
+  }
+  .config-card p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+  }
+
+  /* Estilos para o Seletor de Tema */
+  .theme-selector {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+      justify-content: flex-start;
+  }
+  .botao-tema {
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+  }
+  .botao-tema:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+  }
+
+
+  @media (max-width: 768px) {
+    nav {
+      justify-content: center;
+    }
+    .cards-atalho {
+      max-width: 100%;
+    }
+    .card-atalho {
+      padding: 20px;
+    }
+    .calendario-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .calendario-principal {
+      padding: 15px;
+    }
+    .calendario-agenda {
+      position: relative;
+      top: 0;
+      width: 100%;
+    }
+    .dia-celula {
+      height: 60px;
+      font-size: 1rem;
+      padding: 5px;
+    }
+    .dias-semana {
+      font-size: 0.8rem;
+    }
+    .calendario-header h1 {
+      font-size: 1.5rem;
+    }
+  }

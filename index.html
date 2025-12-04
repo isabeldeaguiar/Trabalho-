@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniClass - Plataforma Educacional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <button data-section="login">Login</button>
+        <button data-section="cadastro">Cadastro</button>
+        <button data-section="inicio">Início</button>
+        <button data-section="cursos">Cursos</button>
+        <button data-section="calendario">Calendário</button>
+        <button data-section="configuracoes">Configurações</button>
+    </nav>
+
+    <main>
+        <section id="login" class="login-container">
+            <h1>Login UniClass</h1>
+            <form id="formLogin">
+                <label for="loginEmail">E-mail</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Digite seu e-mail" required>
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" name="senha" placeholder="Digite sua senha" required>
+                <small id="erroLogin" style="color: #ff4b4b; display: none; margin-top: 10px;">E-mail ou senha incorretos.</small>
+                <button type="submit" class="botao-principal">Entrar</button>
+            </form>
+        </section>
+
+        <section id="cadastro" class="cadastro-container hidden">
+            <h1>Cadastro UniClass</h1>
+            <form id="formCadastro">
+                <label for="cadastroNome">Nome Completo</label>
+                <input type="text" id="cadastroNome" name="nome" placeholder="Seu nome" required>
+                <label for="cadastroEmail">E-mail</label>
+                <input type="email" id="cadastroEmail" name="email" placeholder="Digite seu e-mail" required>
+                <label for="cadastroSenha">Senha</label>
+                <input type="password" id="cadastroSenha" name="senha" placeholder="Crie uma senha" required>
+                <small id="erroCadastro" style="color: #ff4b4b; display: none; margin-top: 10px;">Erro no cadastro. Tente novamente.</small>
+                <button type="submit" class="botao-principal">Cadastrar</button>
+            </form>
+        </section>
+
+        <section id="inicio" class="hidden">
+            <h1>Bem-vindo ao UniClass!</h1>
+            <p>Sua jornada de aprendizado começa agora. Clique nos atalhos abaixo para navegar rapidamente.</p>
+            <div class="cards-atalho">
+                <div class="card-atalho" onclick="mostrarSecao('cursos')">
+                    <div>
+                        <h3>Meus Cursos</h3>
+                        <p>Acesse seus materiais e aulas atuais.</p>
+                    </div>
+                    <span class="card-atalho-icon">📖</span> </div>
+                <div class="card-atalho" onclick="mostrarSecao('calendario')">
+                    <div>
+                        <h3>Calendário</h3>
+                        <p>Veja os prazos e eventos importantes.</p>
+                    </div>
+                    <span class="card-atalho-icon">📅</span> </div>
+                <div class="card-atalho" onclick="mostrarSecao('configuracoes')">
+                    <div>
+                        <h3>Configurações</h3>
+                        <p>Gerencie sua conta e personalize o tema.</p>
+                    </div>
+                    <span class="card-atalho-icon">⚙️</span> </div>
+            </div>
+        </section>
+
+        <section id="cursos" class="hidden">
+            <h1>Cursos Disponíveis</h1>
+            <p>Escolha um curso e comece a aprender imediatamente.</p>
+            <div class="curso-lista">
+                <div class="curso-card">
+                    <h3>Introdução à Programação</h3>
+                    <p>Aprenda os fundamentos de lógica e código com Python.</p>
+                    <button data-curso-id="progintro">Acessar Curso</button>
+                </div>
+                <div class="curso-card">
+                    <h3>Marketing Digital Essencial</h3>
+                    <p>Domine as ferramentas e estratégias do marketing online.</p>
+                    <button data-curso-id="marketingdigital">Acessar Curso</button>
+                </div>
+                <div class="curso-card">
+                    <h3>Design Gráfico para Iniciantes</h3>
+                    <p>Conheça os princípios do design e softwares básicos.</p>
+                    <button data-curso-id="designiniciante">Acessar Curso</button>
+                </div>
+                <div class="curso-card">
+                    <h3>Excel Avançado</h3>
+                    <p>Tabelas dinâmicas, macros e análise de dados avançada.</p>
+                    <button disabled>Em breve...</button>
+                </div>
+                <div class="curso-card">
+                    <h3>Comunicação Empresarial</h3>
+                    <p>Desenvolva habilidades de comunicação oral e escrita no ambiente de trabalho.</p>
+                    <button disabled>Em breve...</button>
+                </div>
+                <div class="curso-card">
+                    <h3>Machine Learning Fundamentos</h3>
+                    <p>Conceitos básicos de IA, modelos de regressão e classificação.</p>
+                    <button disabled>Em breve...</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="curso-detalhe" class="hidden">
+            <h1 id="detalheTitulo">Detalhes do Curso</h1>
+            <p id="detalheDescricao">Aqui você encontrará o conteúdo do curso selecionado.</p>
+            <div id="detalheConteudo">
+                <ul class="modulos-lista">
+                    <li>Módulo 1: Introdução (Conteúdo Padrão)</li>
+                    <li>Módulo 2: Estruturas (Conteúdo Padrão)</li>
+                    <li>Módulo 3: Projeto Final (Conteúdo Padrão)</li>
+                </ul>
+                <button onclick="mostrarSecao('cursos')" class="botao-principal" style="margin-top: 20px;">Voltar Lista de Cursos</button>
+            </div>
+        </section>
+
+        <section id="calendario" class="hidden">
+            <h1>Calendário e Agenda</h1>
+            <div class="calendario-container">
+                <div class="calendario-principal">
+                    <div class="calendario-header">
+                        <button id="prevMonthBtn">Mês Anterior</button>
+                        <h1 id="mesAnoDisplay">Setembro 2024</h1>
+                        <button id="nextMonthBtn">Próximo Mês</button>
+                        <button id="limparEventosBtn" class="botao-limpar-eventos">🗑️ Limpar Eventos</button>
+                    </div>
+                    <div class="calendario-dias">
+                        <span class="dias-semana">Dom</span>
+                        <span class="dias-semana">Seg</span>
+                        <span class="dias-semana">Ter</span>
+                        <span class="dias-semana">Qua</span>
+                        <span class="dias-semana">Qui</span>
+                        <span class="dias-semana">Sex</span>
+                        <span class="dias-semana">Sáb</span>
+                        </div>
+                    <div id="gridDias" class="calendario-dias">
+                        </div>
+                </div>
+                <div class="calendario-agenda">
+                    <h2>Agenda do Dia</h2>
+                    <div id="listaEventos" class="lista-eventos">
+                        <p>Selecione um dia para ver ou adicionar eventos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="configuracoes" class="configuracoes-container hidden">
+            <h1>Configurações da Conta</h1>
+
+            <div class="config-card">
+                <h3>Mudar Tema</h3>
+                <p>Personalize as cores da plataforma UniClass.</p>
+                <div class="theme-selector">
+                    <button class="botao-tema" data-theme="dark" style="background-color: #1a1047; color: #00f0ff; border: 2px solid #00f0ff;">Tema Escuro (Padrão)</button>
+                    <button class="botao-tema" data-theme="light" style="background-color: #eee; color: #333; border: 2px solid #b45bff;">Tema Claro</button>
+                </div>
+            </div>
+
+            <div class="config-card">
+                <h3>Segurança</h3>
+                <p>Gerencie sua senha de acesso.</p>
+                <button id="abrirModalSenha" class="botao-principal" style="background: linear-gradient(90deg, #b45bff, #00f0ff);">Alterar Senha</button>
+            </div>
+
+            <div class="config-card">
+                <h3>Sair da Conta</h3>
+                <p>Encerre sua sessão de forma segura.</p>
+                <button id="botaoLogoutConfig" class="botao-principal" style="background-color: #ff4b4b;">Sair</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="eventoModal" class="modal-overlay hidden">
+        <div class="modal-conteudo">
+            <h2>Novo Evento</h2>
+            <button id="fecharModalBtn">×</button>
+            <form id="formEvento">
+                <input type="hidden" id="eventoDataInput" name="data">
+                <label for="eventoNome">Nome do Evento</label>
+                <input type="text" id="eventoNome" name="nome" required placeholder="Ex: Entrega de Projeto">
+                <label for="eventoDescricao">Descrição</label>
+                <textarea id="eventoDescricao" name="descricao" rows="3" placeholder="Detalhes do evento (opcional)"></textarea>
+                <p id="erroEvento" style="color: #ff4b4b; display: none; margin-top: 10px;"></p>
+                <button type="submit" class="botao-principal">Salvar Evento</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="senhaModal" class="modal-overlay hidden">
+        <div class="modal-conteudo">
+            <h2>Alterar Senha</h2>
+            <button id="fecharSenhaModalBtn">×</button>
+            <form id="formAlterarSenha">
+                <label for="senhaAtual">Senha Atual</label>
+                <input type="password" id="senhaAtual" name="senhaAtual" required placeholder="Digite sua senha atual">
+                <label for="novaSenha">Nova Senha</label>
+                <input type="password" id="novaSenha" name="novaSenha" required placeholder="Mínimo 8 caracteres">
+                <label for="confirmarNovaSenha">Confirmar Nova Senha</label>
+                <input type="password" id="confirmarNovaSenha" name="confirmarNovaSenha" required placeholder="Digite a nova senha novamente">
+                <small id="erroSenha" style="color: #ff4b4b; display: none; margin-top: 10px;"></small>
+                <button type="submit" class="botao-principal">Salvar Nova Senha</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis Globais e Inicialização
+        const gridDias = document.getElementById('gridDias');
+        const mesAnoDisplay = document.getElementById('mesAnoDisplay');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const listaEventosContainer = document.getElementById('listaEventos');
+        const eventoModal = document.getElementById('eventoModal');
+        const fecharModalBtn = document.getElementById('fecharModalBtn');
+        const formEvento = document.getElementById('formEvento');
+        const eventoDataInput = document.getElementById('eventoDataInput');
+        const eventoNome = document.getElementById('eventoNome');
+        const eventoDescricao = document.getElementById('eventoDescricao');
+        const erroEvento = document.getElementById('erroEvento');
+        const MAX_EVENTOS_POR_DIA = 10;
+        let dataAtual = new Date();
+        // NOTA: Usando localStorage para persistir eventos
+        let eventos = JSON.parse(localStorage.getItem('eventosUniClass')) || {};
+        
+        // Variáveis do Modal de Senha
+        const senhaModal = document.getElementById('senhaModal');
+        const fecharSenhaModalBtn = document.getElementById('fecharSenhaModalBtn');
+        const abrirModalSenhaBtn = document.getElementById('abrirModalSenha');
+        const formAlterarSenha = document.getElementById('formAlterarSenha');
+        const erroSenha = document.getElementById('erroSenha');
+        const botaoLogoutConfig = document.getElementById('botaoLogoutConfig');
+
+        // Estado da Sessão e Tema
+        let isLoggedIn = false;
+        let currentSection = 'login';
+        // Estado do Tema (Padrão: dark)
+        let currentTheme = localStorage.getItem('uniclassTheme') || 'dark';
+
+        // Dados dos Cursos Funcionais
+        const courseData = {
+            'progintro': {
+                titulo: 'Introdução à Programação (Python)',
+                descricao: 'Este curso cobre a lógica de programação, estruturas de dados básicas e a sintaxe fundamental do Python, preparando você para projetos iniciais.',
+                modulos: ['Conceitos Fundamentais e Variáveis', 'Estruturas de Controle de Fluxo (If/Else, Loops)', 'Funções e Modularização', 'Introdução a Listas e Dicionários']
+            },
+            'marketingdigital': {
+                titulo: 'Marketing Digital Essencial',
+                descricao: 'Domine SEO, mídias sociais, e-mail marketing e a criação de campanhas digitais eficazes para alavancar qualquer negócio.',
+                modulos: ['SEO e Marketing de Conteúdo', 'Estratégias de Redes Sociais', 'Ferramentas de Análise (Analytics)', 'Fundamentos de Campanha Paga (Ads)']
+            },
+            'designiniciante': {
+                titulo: 'Design Gráfico para Iniciantes',
+                descricao: 'Aprenda sobre tipografia, cores, composição e use softwares básicos de design para criar artes e layouts.',
+                modulos: ['Teoria das Cores e Tipografia', 'Princípios de Composição Visual', 'Introdução ao Software (Simulado)', 'Criação de Identidade Visual Básica']
+            }
+        };
+
+        // --- FUNÇÕES DE UTILIDADE ---
+
+        // Função para aplicar o tema (100% Funcional)
+        function aplicarTema(theme) {
+            document.body.className = theme === 'light' ? 'light-theme' : '';
+            currentTheme = theme;
+            localStorage.setItem('uniclassTheme', theme);
+        }
+
+        // Formata uma data Date para uma string AAAA-MM-DD.
+        function formatarData(data) {
+            const ano = data.getFullYear();
+            const mes = String(data.getMonth() + 1).padStart(2, '0');
+            const dia = String(data.getDate()).padStart(2, '0');
+            return `${ano}-${mes}-${dia}`;
+        }
+
+        // Formata uma string AAAA-MM-DD para exibição DD/MM/AAAA.
+        function formatarDataDisplay(dataString) {
+            if (!dataString) return '';
+            const [ano, mes, dia] = dataString.split('-');
+            return `${dia}/${mes}/${ano}`;
+        }
+
+        // Função de Logout
+        function fazerLogout() {
+            isLoggedIn = false;
+            currentSection = 'login';
+            atualizarInterface();
+        }
+
+        // --- FUNÇÕES DE NAVEGAÇÃO E INTERFACE ---
+
+        // Atualiza a visibilidade das seções e dos botões de navegação.
+        function atualizarInterface() {
+            // 1. Oculta todas as seções
+            document.querySelectorAll('main section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // 2. Controla a visibilidade dos botões de navegação
+            document.querySelectorAll('nav button').forEach(button => {
+                const targetSection = button.getAttribute('data-section');
+                if (targetSection === 'login' || targetSection === 'cadastro') {
+                    // Login/Cadastro só aparece se NÃO estiver logado
+                    button.style.display = isLoggedIn ? 'none' : 'block';
+                } else {
+                    // Início/Cursos/Calendário/Configurações só aparecem se ESTIVER logado
+                    button.style.display = isLoggedIn ? 'block' : 'none';
+                }
+            });
+
+            // 3. Define a seção atual
+            let sectionToShow = currentSection;
+
+            // Redireciona se não estiver logado e tentar acessar uma seção restrita
+            if (!isLoggedIn && (sectionToShow !== 'login' && sectionToShow !== 'cadastro')) {
+                sectionToShow = 'login';
+                currentSection = 'login';
+            }
+
+            // 4. Mostra a seção correta
+            const sectionElement = document.getElementById(sectionToShow);
+            if (sectionElement) {
+                sectionElement.classList.remove('hidden');
+            }
+
+            // Se a seção for o calendário, renderiza
+            if (sectionToShow === 'calendario') {
+                renderizarCalendario();
+            }
+        }
+
+        // Função para mudar a seção visível.
+        function mostrarSecao(secao) {
+            currentSection = secao;
+            atualizarInterface();
+        }
+        window.mostrarSecao = mostrarSecao; // Expondo para o onclick no HTML
+
+        // Função para acessar detalhes do curso
+        function acessarCurso(courseId) {
+            const curso = courseData[courseId];
+            if (!curso) { return; }
+
+            document.getElementById('detalheTitulo').textContent = curso.titulo;
+            document.getElementById('detalheDescricao').textContent = curso.descricao;
+
+            const detalheConteudo = document.getElementById('detalheConteudo');
+            const oldList = detalheConteudo.querySelector('.modulos-lista');
+            if (oldList) oldList.remove();
+
+            const modulosLista = document.createElement('ul');
+            modulosLista.className = 'modulos-lista';
+            curso.modulos.forEach(modulo => {
+                const li = document.createElement('li');
+                li.textContent = modulo;
+                modulosLista.appendChild(li);
+            });
+
+            detalheConteudo.insertBefore(modulosLista, detalheConteudo.lastElementChild);
+            mostrarSecao('curso-detalhe');
+        }
+        window.acessarCurso = acessarCurso; // Expondo para o onclick no HTML
+
+        // --- LÓGICA DO CALENDÁRIO ---
+
+        // Renderiza o calendário para o mês de dataAtual.
+        function renderizarCalendario() {
+            gridDias.innerHTML = '';
+            const ano = dataAtual.getFullYear();
+            const mes = dataAtual.getMonth();
+            const hoje = new Date();
+            const hojeString = formatarData(hoje);
+
+            mesAnoDisplay.textContent = new Date(ano, mes).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+
+            const primeiroDiaDoMes = new Date(ano, mes, 1).getDay();
+            const ultimoDiaDoMes = new Date(ano, mes + 1, 0).getDate();
+            const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+
+            // Dias do mês anterior para preenchimento
+            for (let i = primeiroDiaDoMes; i > 0; i--) {
+                const diaCelula = document.createElement('div');
+                diaCelula.className = 'dia-celula inativo';
+                diaCelula.textContent = ultimoDiaMesAnterior - i + 1;
+                gridDias.appendChild(diaCelula);
+            }
+
+            // Dias do mês atual
+            for (let dia = 1; dia <= ultimoDiaDoMes; dia++) {
+                const data = new Date(ano, mes, dia);
+                const dataString = formatarData(data);
+                const diaCelula = document.createElement('div');
+                diaCelula.className = 'dia-celula';
+                diaCelula.textContent = dia;
+                diaCelula.dataset.data = dataString;
+
+                if (dataString === hojeString) {
+                    diaCelula.classList.add('hoje');
+                }
+
+                if (eventos[dataString] && eventos[dataString].length > 0) {
+                    const eventosParaExibir = eventos[dataString].slice(0, 3);
+                    eventosParaExibir.forEach(evento => {
+                        const span = document.createElement('span');
+                        span.className = 'dia-evento';
+                        span.textContent = evento.nome;
+                        diaCelula.appendChild(span);
+                    });
+
+                    if (eventos[dataString].length > eventosParaExibir.length) {
+                        const maisSpan = document.createElement('span');
+                        maisSpan.className = 'dia-evento';
+                        maisSpan.textContent = `+${eventos[dataString].length - eventosParaExibir.length} mais`;
+                        maisSpan.style.backgroundColor = '#5c32c2'; 
+                        diaCelula.appendChild(maisSpan);
+                    }
+                }
+
+                diaCelula.addEventListener('click', () => abrirModalEvento(dataString));
+                diaCelula.addEventListener('click', () => renderizarListaEventos(dataString));
+
+                gridDias.appendChild(diaCelula);
+            }
+
+            // Dias do próximo mês para preenchimento
+            const diasRestantes = 42 - gridDias.children.length;
+            for (let i = 1; i <= diasRestantes; i++) {
+                const diaCelula = document.createElement('div');
+                diaCelula.className = 'dia-celula inativo';
+                diaCelula.textContent = i;
+                gridDias.appendChild(diaCelula);
+            }
+
+            renderizarListaEventos(hojeString);
+        }
+
+        // Renderiza a lista de eventos para uma data específica.
+        function renderizarListaEventos(data) {
+            listaEventosContainer.innerHTML = '';
+
+            const eventosDoDia = eventos[data];
+
+            const tituloAgenda = document.createElement('h2');
+            tituloAgenda.textContent = `Agenda ${formatarDataDisplay(data)}`;
+            listaEventosContainer.appendChild(tituloAgenda);
+
+            if (eventosDoDia && eventosDoDia.length > 0) {
+                eventosDoDia.forEach(evento => {
+                    const p = document.createElement('p');
+                    p.innerHTML = `<strong>${evento.nome}</strong><br>${evento.descricao || 'Sem descrição.'}`;
+                    listaEventosContainer.appendChild(p);
+                });
+            } else {
+                const p = document.createElement('p');
+                p.textContent = `Nenhum evento agendado para ${formatarDataDisplay(data)}.`;
+                listaEventosContainer.appendChild(p);
+            }
+        }
+
+        // Abre o modal de evento.
+        function abrirModalEvento(dataString) {
+            renderizarListaEventos(dataString);
+            erroEvento.style.display = 'none'; 
+            eventoDataInput.value = dataString;
+            eventoNome.value = '';
+            eventoDescricao.value = '';
+            eventoModal.classList.remove('hidden');
+        }
+
+        // Fecha o modal de evento.
+        function fecharModalEvento() {
+            eventoModal.classList.add('hidden');
+        }
+        fecharModalBtn.addEventListener('click', fecharModalEvento);
+
+        // Limpar Todos os Eventos
+        function limparEventos() {
+            if (confirm("Tem certeza que deseja limpar **TODOS** os eventos? Esta ação é irreversível.")) {
+                localStorage.removeItem('eventosUniClass');
+                eventos = {};
+                renderizarCalendario();
+                renderizarListaEventos(formatarData(new Date()));
+                alert("✅ Todos os eventos foram removidos com sucesso!");
+            }
+        }
+
+        // --- EVENT LISTENERS GERAIS ---
+
+        // Manipulador de Login (Simulação)
+        const formLogin = document.getElementById('formLogin');
+        if (formLogin) {
+            formLogin.addEventListener('submit', e => {
+                e.preventDefault();
+                isLoggedIn = true;
+                currentSection = 'inicio';
+                const erroLogin = document.getElementById('erroLogin');
+                erroLogin.textContent = 'Login bem-sucedido!';
+                erroLogin.style.color = '#4bff4b';
+                erroLogin.style.display = 'block';
+                setTimeout(() => {
+                    erroLogin.style.display = 'none';
+                    erroLogin.style.color = '#ff4b4b';
+                    erroLogin.textContent = 'E-mail ou senha incorretos.';
+                }, 500);
+                atualizarInterface();
+            });
+        }
+
+        // Manipulador de Cadastro (Simulação)
+        const formCadastro = document.getElementById('formCadastro');
+        if (formCadastro) {
+            formCadastro.addEventListener('submit', e => {
+                e.preventDefault();
+                isLoggedIn = true;
+                currentSection = 'inicio';
+                const erroCadastro = document.getElementById('erroCadastro');
+                erroCadastro.textContent = 'Cadastro bem-sucedido!';
+                erroCadastro.style.color = '#4bff4b';
+                erroCadastro.style.display = 'block';
+                setTimeout(() => {
+                    erroCadastro.style.display = 'none';
+                    erroCadastro.style.color = '#ff4b4b';
+                    erroCadastro.textContent = 'Erro no cadastro. Tente novamente.';
+                }, 500);
+                atualizarInterface();
+            });
+        }
+
+
+        // Salvar o Evento
+        formEvento.addEventListener('submit', e => {
+            e.preventDefault();
+            const data = eventoDataInput.value;
+            const nome = eventoNome.value.trim();
+            const descricao = eventoDescricao.value.trim();
+
+            erroEvento.style.display = 'none';
+
+            if (!nome) {
+                erroEvento.textContent = 'O nome do evento é obrigatório.';
+                erroEvento.style.display = 'block';
+                return;
+            }
+
+            if (!eventos[data]) eventos[data] = [];
+
+            if (eventos[data].length >= MAX_EVENTOS_POR_DIA) {
+                erroEvento.textContent = `Limite atingido! Você pode ter no máximo ${MAX_EVENTOS_POR_DIA} eventos por dia.`;
+                erroEvento.style.display = 'block';
+                return; 
+            }
+
+            eventos[data].push({ nome, descricao });
+            localStorage.setItem('eventosUniClass', JSON.stringify(eventos));
+            
+            renderizarCalendario();
+            renderizarListaEventos(data); 
+            fecharModalEvento();
+        });
+
+        // Navegação entre meses
+        prevMonthBtn.addEventListener('click', () => {
+            dataAtual.setMonth(dataAtual.getMonth() - 1);
+            renderizarCalendario();
+        });
+        nextMonthBtn.addEventListener('click', () => {
+            dataAtual.setMonth(dataAtual.getMonth() + 1);
+            renderizarCalendario();
+        });
+        document.getElementById('limparEventosBtn').addEventListener('click', limparEventos);
+
+
+        // --- LÓGICA DE CONFIGURAÇÕES (NOVA) ---
+
+        // Abrir Modal de Senha
+        if (abrirModalSenhaBtn) {
+             abrirModalSenhaBtn.addEventListener('click', () => {
+                senhaModal.classList.remove('hidden');
+                erroSenha.style.display = 'none';
+                formAlterarSenha.reset();
+            });
+        }
+
+        // Fechar Modal de Senha
+        if (fecharSenhaModalBtn) {
+            fecharSenhaModalBtn.addEventListener('click', () => {
+                senhaModal.classList.add('hidden');
+            });
+        }
+        if (senhaModal) {
+            senhaModal.addEventListener('click', (e) => {
+                if (e.target.id === 'senhaModal') {
+                    senhaModal.classList.add('hidden');
+                }
+            });
+        }
+
+        // Lógica de Submissão do Formulário de Senha (SIMULAÇÃO)
+        if (formAlterarSenha) {
+            formAlterarSenha.addEventListener('submit', e => {
+                e.preventDefault();
+                const senhaAtual = document.getElementById('senhaAtual').value;
+                const novaSenha = document.getElementById('novaSenha').value;
+                const confirmarNovaSenha = document.getElementById('confirmarNovaSenha').value;
+
+                erroSenha.style.display = 'none';
+                erroSenha.style.color = '#ff4b4b';
+
+                if (senhaAtual.length < 6) {
+                    erroSenha.textContent = 'A senha atual está incorreta. (Simulação: min 6 caracteres)';
+                    erroSenha.style.display = 'block';
+                    return;
+                }
+
+                if (novaSenha.length < 8) {
+                    erroSenha.textContent = 'A nova senha deve ter no mínimo 8 caracteres.';
+                    erroSenha.style.display = 'block';
+                    return;
+                }
+
+                if (novaSenha !== confirmarNovaSenha) {
+                    erroSenha.textContent = 'A nova senha e a confirmação de senha não coincidem.';
+                    erroSenha.style.display = 'block';
+                    return;
+                }
+
+                // SIMULAÇÃO DE SUCESSO
+                erroSenha.textContent = '✅ Senha alterada com sucesso! (Simulação)';
+                erroSenha.style.color = '#4bff4b';
+                erroSenha.style.display = 'block';
+
+                formAlterarSenha.reset();
+                setTimeout(() => {
+                    senhaModal.classList.add('hidden');
+                    erroSenha.style.display = 'none';
+                }, 2000);
+            });
+        }
+
+        // Inicialização da Aplicação
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aplica o tema imediatamente ao carregar
+            aplicarTema(currentTheme); 
+            atualizarInterface();
+
+            // 1. LÓGICA DE MUDANÇA DE TEMA
+            document.querySelectorAll('.botao-tema').forEach(button => {
+                button.addEventListener('click', e => {
+                    const theme = e.currentTarget.getAttribute('data-theme');
+                    aplicarTema(theme);
+                });
+            });
+
+            // 2. LÓGICA DE LOGOUT NA PÁGINA DE CONFIGURAÇÕES
+            if (botaoLogoutConfig) {
+                botaoLogoutConfig.addEventListener('click', fazerLogout);
+            }
+            
+            // Adiciona listeners de navegação
+            document.querySelectorAll('nav button').forEach(button => {
+                button.addEventListener('click', e => {
+                    const secao = e.currentTarget.getAttribute('data-section');
+                    mostrarSecao(secao);
+                });
+            });
+
+            // Adiciona listeners para os botões de acesso ao curso
+            document.querySelectorAll('#cursos button[data-curso-id]').forEach(button => {
+                button.addEventListener('click', e => {
+                    const courseId = e.currentTarget.getAttribute('data-curso-id');
+                    acessarCurso(courseId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
